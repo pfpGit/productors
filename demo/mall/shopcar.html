@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/loaders.min.css" />
     <link rel="stylesheet" type="text/css" href="css/loading.css" />
     <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <link rel="stylesheet" type="text/css" href="plugin/layer_mobile-v2.0/need/layer.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
       <script src="js/jquery.min.js"  type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
@@ -25,69 +26,65 @@
 		<section class="shopcar">
 			<div class="shopcar-checkbox">
 				<label for="shopcar" onselectstart="return false"></label>
-				<input type="checkbox" id="shopcar"/>
 			</div>
 			<figure><img src="images/index-ph02.png" /></figure>
 			<dl>
 				<dt>超级大品牌服装，现在买只要9298</dt>
 				<dd>超级新款</dd>
 				<div class="add">
-					<span>-</span>
-					<input type="text" value="13" />
-					<span>+</span>
+					<span class="subBtn">-</span>
+					<input class="num" type="text" value="1" />
+					<span class="addBtn">+</span>
 				</div>
-				<small>￥6353.00</small>
+				<small>￥<i class="price">6353.00</i></small>
 			</dl>
 		</section>
 		<section class="shopcar">
 			<div class="shopcar-checkbox">
 				<label for="shopcar" onselectstart="return false"></label>
-				<input type="checkbox" id="shopcar"/>
 			</div>
 			<figure><img src="images/index-ph02.png" /></figure>
 			<dl>
 				<dt>超级大品牌服装，现在买只要9298</dt>
 				<dd>超级新款</dd>
 				<div class="add">
-					<span>-</span>
-					<input type="text" value="13" />
-					<span>+</span>
+					<span class="subBtn">-</span>
+					<input class="num" type="text" value="1" />
+					<span class="addBtn">+</span>
 				</div>
-				<small>￥6353.00</small>
+				<small>￥<i class="price">6353.00</i></small>
 			</dl>
 		</section>
 		<section class="shopcar">
 			<div class="shopcar-checkbox">
 				<label for="shopcar" onselectstart="return false"></label>
-				<input type="checkbox" id="shopcar"/>
 			</div>
 			<figure><img src="images/index-ph02.png" /></figure>
 			<dl>
 				<dt>超级大品牌服装，现在买只要9298</dt>
 				<dd>超级新款</dd>
 				<div class="add">
-					<span>-</span>
-					<input type="text" value="13" />
-					<span>+</span>
+					<span class="subBtn">-</span>
+					<input class="num" type="text" value="1" />
+					<span class="addBtn">+</span>
 				</div>
-				<small>￥6353.00</small>
+				<small>￥<i class="price">6353.02</i></small>
 			</dl>
 		</section>		
 		<section class="shopcar">
 			<div class="shopcar-checkbox">
 				<label for="shopcar" onselectstart="return false"></label>
-				<input type="checkbox" id="shopcar"/>
 			</div>
 			<figure><img src="images/index-ph02.png" /></figure>
 			<dl>
 				<dt>超级大品牌服装，现在买只要9298</dt>
 				<dd>超级新款</dd>
 				<div class="add">
-					<span>-</span>
-					<input type="text" value="13" />
-					<span>+</span>
+					<span class="subBtn">-</span>
+					<input class="num" type="text" value="1" />
+					<span class="addBtn">+</span>
 				</div>
-				<small>￥6353.00</small>
+				<small>￥<i class="price">6353.10</i></small>
 			</dl>
 		</section>		
 		<!--去结算-->
@@ -97,8 +94,9 @@
 
 	<footer class="page-footer fixed-footer">
 		<div class="shop-go">
-			<b>合计：￥1108.90</b>
-			<span><a href="buy.html" >去结算（2）</a></span>
+			<button id="checkAll">全选</button>
+			<b>合计:<i id="totalPrice" style="font-style: normal;color:#f66;">0.00</i></b>
+			<span><a href="buy.html" id="toBuy">去结算(<i id="orderNum" style="font-style: normal;">0</i>)</a></span>
 		</div>
 		<ul>
 			<li>
@@ -127,13 +125,103 @@
 			</li>
 		</ul>
 	</footer>
-	
+	<script src="plugin/layer_mobile-v2.0/layer.js"></script>
 	<script type="text/javascript">
-		$(".shopcar-checkbox label").on('touchstart',function(){
+	$(function(){
+		//选择订单
+		$(".contaniner").on('touchstart','label',function(){
 			var self = $(this);
-			$(".shopcar-checkbox label").removeClass("shopcar-checkd")
-			self.addClass('shopcar-checkd');
+			self.hasClass('shopcar-checkd')?self.removeClass('shopcar-checkd'):self.addClass('shopcar-checkd');
+			checkAllStyle();
+			calculatePrice();
+			orderNum();
 		})
+		
+		//选择全部
+		$('#checkAll').on('touchstart',checkAll);
+		
+		//增减订单数量
+		$('.contaniner').on('touchstart','.addBtn',function(e){
+			e.preventDefault();
+			var numDom = $(this).prev('.num'),
+				num = parseInt(numDom.val())+1;
+			numDom.val(num);
+			calculatePrice();
+			return false;
+			
+		})
+		$('.contaniner').on('touchstart','.subBtn',function(e){
+			e.preventDefault();
+			var numDom = $(this).next('.num'),
+				num = parseInt(numDom.val())-1;
+			if(num <0)return false;
+			numDom.val(num);
+			calculatePrice();
+			return false;
+			
+		})
+		
+		//点击购买
+		$('#toBuy').on('touchstart',function(e){
+			if($('.shopcar-checkbox label.shopcar-checkd').length == 0) {
+				e.preventDefault();
+				  layer.open({
+				    content: '请选择需要支付的订单'
+				    ,skin: 'msg'
+				    ,time: 2 
+				  });
+			}
+		})
+		
+	});
+	
+	//选择全部订单
+	function checkAll(){
+		var me = $(this);
+			label = $(".shopcar-checkbox label"),
+			cls = 'shopcar-checkd',
+			len = 0,
+			domLen = label.length;
+			
+		label.each(function(index,e){
+			if($(this).hasClass(cls)){
+				len++;
+			}
+		})
+		
+		if(len == domLen){
+			label.removeClass(cls);
+		}else{
+			label.addClass(cls);
+		}
+		checkAllStyle();
+		calculatePrice();
+		orderNum();
+	}
+	
+	//计算金额
+	function calculatePrice(){
+		var totalPrice = 0.00;
+		$('.contaniner label.shopcar-checkd').each(function(){
+			var me = $(this)
+				,listDom = me.closest('.shopcar')
+				,price = parseFloat(listDom.find('.price').text()).toFixed(2)
+				,num = parseInt(listDom.find('.num').val());
+				
+			totalPrice += price*num;	
+		})
+		$('#totalPrice').text(totalPrice.toFixed(2));
+	}
+	
+	//计算订单数
+	function orderNum(){
+		$('#orderNum').text($('.contaniner label.shopcar-checkd').length);
+	}
+	
+	//全选样式
+	function checkAllStyle(){
+		$('.contaniner label.shopcar-checkd').length == $('.contaniner label').length ? $('#checkAll').addClass('check') : $('#checkAll').removeClass('check');
+	}
 	</script>
 </body>
 </html>

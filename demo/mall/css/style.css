@@ -94,13 +94,18 @@ body{background-color: #f2f2f2;}
 .contaniner .shopcar dl .add input{border: solid 1px #eaeaea; width:100%;margin-left: -1px; display:table-cell;font-size:1.25em ; padding: 10% 0; color: #666; text-align: center;}
 .contaniner .shopcar dl h3{ position: absolute; right: 3%; bottom: 20%; font-size: 1.9em; color: #f66; font-weight: normal;}
 .contaniner .shopcar dl small{ position: absolute; left: 3%; bottom: 0; display: block; font-size: 1.6rem;color:#f66}
+.contaniner .shopcar dl small i{ font-style: normal;}
 .contaniner .shopcar dl small img{width: 100%;}
 
 
-
 .page-footer .shop-go{ margin-bottom: 5em; width: 100%; overflow: hidden; position: fixed; z-index: 999; bottom: 0; left: 0;}
-.page-footer .shop-go b{float: left; width: 60%; background-color: #999; text-align: center; padding: 3% 0; color: #fff; font-size: 1.7em; font-weight: normal;}
-.page-footer .shop-go span{float: left; width: 40%; background-color: #f66; text-align: center; padding: 3% 0; color: #fff; font-size: 1.7em; font-weight: normal;}
+.page-footer .shop-go button,
+.page-footer .shop-go b,
+.page-footer .shop-go span{padding: 3% 0;font-size: 1.6em; font-weight: normal;float: left;}
+.page-footer .shop-go button{border: 1px solid #eaeaea;border-left: none;border-right: none;width: 25%;text-align: left;text-indent: 1.7em; color: #333; -webkit-appearance: none;appearance: none;background-image:url(../images/check.png);background-color: #fff;background-repeat: no-repeat;background-size: 26%;background-position:5% 50%;}
+.page-footer .shop-go button.check{background-image: url(../images/checke.png) ;}
+.page-footer .shop-go b{border: 1px solid #eaeaea;border-left: none;border-right: none;width: 43%; background-color: #fff; text-align: left; color: #333; }
+.page-footer .shop-go span{border: 1px solid #f66;border-left: none;border-right: none;width: 32%; background-color: #f66; text-align: center; color: #fff; }
 .page-footer .shop-go span a{color: #fff;}
 /*个人中心*/
 .self-header{ width: 80%; background-color: #f66; padding: 6% 10%; overflow: hidden;}
