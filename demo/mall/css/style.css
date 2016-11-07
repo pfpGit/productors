@@ -120,7 +120,7 @@ body{background-color: #f2f2f2;}
 
 .contaniner .self{ width: 100%; margin-top: 3%;}
 .contaniner .self dl{ width: 100%;}
-.contaniner .self dl dt{ width: 90%; overflow: hidden; padding:2.3% 5%; background-color: #fff; }
+.contaniner .self dl dt{ width: 90%; overflow: hidden; padding:2.5% 5%; background-color: #fff; }
 .contaniner .self dl dt a{ width: 100%; display: block; overflow: hidden;}
 .contaniner .self dl dt img{width: 6%; vertical-align: middle;}
 .contaniner .self dl dt b{ color: #666; font-weight: normal; font-size: 1.4em; margin:0 3%;vertical-align: middle; }
@@ -133,7 +133,7 @@ body{background-color: #f2f2f2;}
 .contaniner .self dl dd ul li img{ height: 45%;}
 .contaniner .self dl dd ul li p{ font-size:1.2em; color: #666; padding-top: 4%;}
 .contaniner .self .self-icon{ width: 100%; margin-top:6%; background-color: #fff}
-.contaniner .self .self-icon li{ width:90%;padding:2.3% 5%; overflow: hidden; border-bottom: solid 1px #eaeaea;}
+.contaniner .self .self-icon li{ width:90%;padding:2.5% 5%; overflow: hidden; border-bottom: solid 1px #eaeaea;}
 .contaniner .self .self-icon li a{ width: 100%; display: block; overflow: hidden;}
 .contaniner .self .self-icon li img{ width: 8%; float: left;}
 .contaniner .self .self-icon li p{font-size:1.4em ; color: #666; padding: 1.2% 5%;  float: left;}
